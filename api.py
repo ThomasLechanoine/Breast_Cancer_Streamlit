@@ -12,5 +12,5 @@ params = {
 response = requests.get(url, params=params)
 data = response.json()
 
-# Convertir en DataFrame pour une manipulation facile
+# Convertir en DataFrame pour une manipulation facile et rapide
 df = pd.DataFrame(data['prices'], columns=['timestamp', 'price'])
