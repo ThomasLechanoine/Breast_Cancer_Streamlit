@@ -28,7 +28,7 @@ image = Image.open(image_path_left)
 # Afficher l'image sur la barre latérale
 st.sidebar.image(image_path_left, use_container_width=True)
 
-# Load and display the cover image
+# Load and display the cover images
 # image_path = os.path.join("/home", "bren", "code", "ThomasLechanoine", "Breast_Cancer_Project", "app_img", "01.png")
 # st.image(image_path, use_container_width=True)
 
