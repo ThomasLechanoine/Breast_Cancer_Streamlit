@@ -22,7 +22,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "Machine
 st.set_page_config(page_title="Application de Détection de Cancer", layout="wide")
 
 # Image à afficher à gauche dans la sidebar
-image_path_left = os.path.join("/home", "bren", "code", "ThomasLechanoine", "Breast_Cancer_Project", "app_img", "01.png")
+image_path_left = os.path.join("/Users", "florentcoulon", "code", "ThomasLechanoine", "Breast_Cancer_Project", "app_img", "01.png")
 image = Image.open(image_path_left)
 
 # Afficher l'image sur la barre latérale
@@ -55,7 +55,7 @@ if page == "Graphiques":
     st.write("Analyse des données avec des visualisations graphiques.")
 
     # Définition du répertoire contenant les graphiques
-    graph_dir = os.path.join("/home", "bren", "code", "ThomasLechanoine", "Breast_Cancer_Project", "app_img")
+    graph_dir = os.path.join("/Users", "florentcoulon", "code", "ThomasLechanoine", "Breast_Cancer_Project", "app_img")
 
     # Liste des graphiques avec descriptions
     graph_data = [
@@ -85,8 +85,8 @@ model = load_dl_model()
 # Load the trained model and scaler
 @st.cache_resource
 def load_model():
-    MODEL_PATH = "/home/bren/code/ThomasLechanoine/Breast_Cancer_Project/Machine_learning/models_saved/ml_best_model.pkl"
-    SCALER_PATH = "/home/bren/code/ThomasLechanoine/Breast_Cancer_Project/Machine_learning/models_saved/ml_scaler.pkl"
+    MODEL_PATH = "/Users/florentcoulon/code/ThomasLechanoine/Breast_Cancer_Project/Machine_learning/models_saved/ml_best_model.pkl"
+    SCALER_PATH = "/Users/florentcoulon/code/ThomasLechanoine/Breast_Cancer_Project/Machine_learning/models_saved/ml_scaler.pkl"
     model = joblib.load(MODEL_PATH)
     scaler = joblib.load(SCALER_PATH)
     return model, scaler
@@ -96,7 +96,7 @@ model, scaler = load_model()
 # ---------------------- LOAD test data---------------------
 @st.cache_resource
 def load_test_data():
-    dataset_path = os.path.join("/home", "bren", "code", "ThomasLechanoine", "Breast_Cancer_Project", "Data", "Machine_learning.csv")
+    dataset_path = os.path.join("/Users", "florentcoulon", "code", "ThomasLechanoine", "Breast_Cancer_Project", "Data", "Machine_learning.csv")
     data = pd.read_csv(dataset_path)
     X = data.drop(columns=["id", "diagnosis"])  # Drop unnecessary columns
     y = data["diagnosis"].map({"B": 0, "M": 1})  # Encode labels (B:0, M:1)
@@ -120,7 +120,7 @@ if page == "Prédiction Mammographie (DL)":
     # Ajout d'un uploader pour charger une image
     uploaded_file = st.file_uploader("Téléchargez une image (PNG, JPG, JPEG)", type=["png", "jpg", "jpeg"])
 
-    API_URL = "http://127.0.0.1:8000/predict"  # Plus tard, il suffira de changer cette URL vers ton API cloud
+    API_URL = "http://127.0.0.1:8501/predict"  # Plus tard, il suffira de changer cette URL vers ton API cloud
 
     if uploaded_file is not None:
         # Load image
@@ -178,16 +178,15 @@ st.markdown("""
             font-size: 18px !important;
             font-weight: bold !important;
             padding: 12px 24px !important;
-            border: 3px solid #FF6B6B !important; /* Bordure plus marquée */
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2) !important; /* Ombre douce */
+            border: none !important; /* Suppression des bordures */
+            box-shadow: none !important; /* Suppression de l'ombre */
             transition: all 0.3s ease-in-out !important;
         }
 
         /* Effet hover sur les boutons */
         div.stButton > button:hover, div[data-testid="stFormSubmitButton"] > button:hover {
             background-color: #FF6B6B !important; /* Rouge plus foncé */
-            border: 3px solid #E63946 !important; /* Bordure plus foncée */
-            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3) !important; /* Ombre plus marquée */
+            box-shadow: none !important; /* Suppression de l’ombre */
             transform: scale(1.05) !important; /* Effet léger d'agrandissement */
         }
 
@@ -209,6 +208,24 @@ st.markdown("""
             background-color: #FFFFFF !important;
             color: #1A1A1A !important;
             border: none !important;
+        }
+
+        /* Amélioration des boutons + / - uniquement sur la page Machine Learning */
+        div[data-testid="stNumberInput"] button {
+            background-color: #4A90E2 !important; /* Bleu pastel */
+            color: #FFFFFF !important; /* Texte blanc */
+            border-radius: 6px !important;
+            font-size: 14px !important;
+            font-weight: bold !important;
+            padding: 6px 12px !important;
+            border: none !important;
+            transition: all 0.2s ease-in-out !important;
+        }
+
+        /* Effet hover sur les boutons + / - */
+        div[data-testid="stNumberInput"] button:hover {
+            background-color: #357ABD !important; /* Bleu plus foncé */
+            transform: scale(1.1) !important; /* Effet léger d'agrandissement */
         }
 
         /* Sections dépliables (Expander) */
@@ -233,6 +250,7 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
+
 
 
 
@@ -339,8 +357,7 @@ if page == "Prédiction Cancer (ML)":
         )
 
 
-
-    #--------------------CONFUSION MATRIX------------------
+   #--------------------CONFUSION MATRIX------------------
     if submit_button_1 or submit_button_2:
         # Select appropriate input
         input_data = input_data_1 if submit_button_1 else input_data_2
@@ -352,18 +369,28 @@ if page == "Prédiction Cancer (ML)":
         prediction = model.predict(input_data_scaled)[0]
         diagnostic = "Malin (Cancer)" if prediction == 1 else "Bénin (Sans Cancer)"
 
-
         # Display the result
         st.success(f"Résultat de la prédiction : {diagnostic}")
 
         # Compute Confusion Matrix
-        y_pred = model.predict(scaler.transform(X_test))  # Now X_test is properly loaded
+        y_pred = model.predict(scaler.transform(X_test))
         cm = confusion_matrix(y_test, y_pred)
 
-        # Display the Confusion Matrix as a Heatmap
-        fig, ax = plt.subplots(figsize=(4, 3))  # Adjust figure size to be smaller
-        sns.heatmap(cm, annot=True, fmt='g', cmap="Purples", ax=ax)
-        ax.set_xlabel("True Values")
-        ax.set_ylabel("Predictions")
-        ax.set_title("Confusion Matrix")
+        # Custom colormap similar to provided UI colors
+        from matplotlib.colors import LinearSegmentedColormap
+        custom_cmap = LinearSegmentedColormap.from_list("custom_cmap", ["#e1f0ff", "#a7c8f2", "#6da0e5", "#2e75c5"])
+
+        # Display the Confusion Matrix as a Heatmap with customized colors
+        fig, ax = plt.subplots(figsize=(4, 3))
+        sns.heatmap(cm, annot=True, fmt='g', cmap=custom_cmap, cbar=True,
+                    linewidths=1, linecolor='white', ax=ax)
+        ax.set_xlabel("Valeurs Prédites", fontsize=12, color='#333333')
+        ax.set_ylabel("Valeurs Réelles", fontsize=12, color='#333333')
+        ax.set_title("Matrice de Confusion", fontsize=14, color='#333333')
+
+        # Improve tick labels for visibility
+        ax.xaxis.set_tick_params(labelsize=10, colors='#333333')
+        ax.yaxis.set_tick_params(labelsize=12, colors='#333333')
+
+        plt.tight_layout()
         st.pyplot(fig)
