@@ -44,13 +44,13 @@ st.sidebar.markdown(
 
 # Maintain session state for page navigation
 if "page" not in st.session_state:
-    st.session_state.page = "Prédiction Tumeurs (ML)"
+    st.session_state.page = "Classification Tumeurs (ML)"
 
 # if st.sidebar.button("Graphiques"):
 #     st.session_state.page = "Graphiques"
-if st.sidebar.button("🔬Prédiction Tumeurs \n (Machine Learning)", use_container_width=True):
+if st.sidebar.button("🔬 Classification Tumeurs \n (Machine Learning)", use_container_width=True):
     st.session_state.page = "Prédiction Tumeurs (ML)"
-if st.sidebar.button("📸Prédiction Mammographie \n (Deep Learning)", use_container_width=True):
+if st.sidebar.button("📸 Prédiction Mammographie \n (Deep Learning)", use_container_width=True):
     st.session_state.page = "Prédiction Mammographie (DL)"
 
 
@@ -238,7 +238,7 @@ ML_API_URL = ML_API_URL  # !!! Remplacer cette URL si l'API est hébergée en li
 
 
 # ------------------- Machine Learning Prediction -------------------
-if page == "Prédiction Tumeurs (ML)":
+if page == "Classification Tumeurs (ML)":
     st.title("Classification de tumeurs via Machine Learning")
 
     #  Valeurs par défaut (corrigées)
@@ -383,7 +383,7 @@ if page == "Prédiction Tumeurs (ML)":
 
 #--------------------CONFUSION MATRIX------------------
 # ------------------- AFFICHAGE DE LA MATRICE DE CONFUSION SUR LA PAGE ML -------------------
-if page == "Prédiction Tumeurs (ML)":
+if page == "Classification Tumeurs (ML)":
     st.subheader("📊 Performance de notre Modèle de Machine Learning")
 
     # 📌 Déterminer dynamiquement le dossier contenant `app.py`
