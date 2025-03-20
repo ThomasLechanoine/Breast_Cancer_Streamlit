@@ -49,7 +49,7 @@ if "page" not in st.session_state:
 # if st.sidebar.button("Graphiques"):
 #     st.session_state.page = "Graphiques"
 if st.sidebar.button("🔬 Classification Tumeurs \n (Machine Learning)", use_container_width=True):
-    st.session_state.page = "Prédiction Tumeurs (ML)"
+    st.session_state.page = "Classification Tumeurs (ML)"
 if st.sidebar.button("📸 Prédiction Mammographie \n (Deep Learning)", use_container_width=True):
     st.session_state.page = "Prédiction Mammographie (DL)"
 
