@@ -6,8 +6,7 @@ import tensorflow as tf
 import joblib
 import sys
 import os
-import pandas as pd
-import numpy as np
+import pandaimport numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import confusion_matrix
@@ -1184,3 +1183,21 @@ if page == "Prédiction Cancer (ML)":
 
 
 #-------------------
+(y_test, y_pred)
+
+        # Display the Confusion Matrix as a Heatmap
+        fig, ax = plt.subplots(figsize=(4, 3))  # Adjust figure size to be smaller
+        sns.heatmap(cm, annot=True, fmt='g', cmap="Purples", ax=ax)
+        ax.set_xlabel("True Values")
+        ax.set_ylabel("Predictions")
+        ax.set_title("Confusion Matrix")
+        st.pyplot(fig)
+, y_pred)
+
+        # Display the Confusion Matrix as a Heatmap
+        fig, ax = plt.subplots(figsize=(4, 3))  # Adjust figure size to be smaller
+        sns.heatmap(cm, annot=True, fmt='g', cmap="Purples", ax=ax)
+        ax.set_xlabel("True Values")
+        ax.set_ylabel("Predictions")
+        ax.set_title("Confusion Matrix")
+        st.pyplot(fig)
