@@ -271,7 +271,7 @@ if page == "Classification Tumeurs (ML)":
     with st.expander("Le Machine Learning en quelques mots"):
         st.write("""
 
-        🧠 Vous vous rappelez de l'exemple de l'enfant qui apprend a reconnaitre les chocolatines grace à des informations décrivant une chocolatine et du parallèle avec le Machine Learning ?
+        🧠 Maintenant que vous avez compris comment fonctionne le Machine Learning pour savoir reconnaitre une chocolatine a partir de données.
 
         📸 Application à notre cas :
         Nous avons donné au modèle **des informations de description de tumeur**, pour qu'il apprenne à **reconnaître si la tumeur est maligne ou benigne**.
@@ -285,7 +285,7 @@ if page == "Classification Tumeurs (ML)":
         st.write("""
         🔍 Notre défi était de **pouvoir Développer un modèle capable de classifier les tumeurs bénignes et malignes à partir de caractéristiques extraites d’images médicales.**.
 
-        🎯 Pour cela, nous avons proposé un Diagnostic Assisté par Machine Learning.
+        🎯 Pour cela, nous avons proposé un outil de Diagnostic Assisté par Machine Learning.
         """)
 
     # Ajout d'un deuxième sous-titre avant l'input des caractéristiques tumorales
@@ -427,7 +427,7 @@ if page == "Prédiction Mammographie (DL)":
     with st.expander("Le Deep Learning en quelques mots"):
         st.write("""
 
-        🧠 Vous vous rappelez de l'exemple de l'enfant qui apprend a reconnaitre les chocolatines grâce à des images et du parallèle avec le Deep Learning ?
+        🧠 Maintenant que vous avez compris comment fonctionne le Deep Learning pour savoir reconnaitre une chocolatine à partir d'images.
 
         📸 Application à notre cas :
         **Nous avons montré au modèle des** milliers de mammographies, **afin qu'il apprenne à détecter la présence ou l'absence d'une tumeur**.
