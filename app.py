@@ -341,7 +341,7 @@ if page == "Prédiction Cancer (ML)":
 
 
 
-    #--------------------CONFUSION MATRIX------------------
+  #--------------------CONFUSION MATRIX------------------
     if submit_button_1 or submit_button_2:
         # Select appropriate input
         input_data = input_data_1 if submit_button_1 else input_data_2
@@ -353,36 +353,28 @@ if page == "Prédiction Cancer (ML)":
         prediction = model.predict(input_data_scaled)[0]
         diagnostic = "Malin (Cancer)" if prediction == 1 else "Bénin (Sans Cancer)"
 
-
         # Display the result
         st.success(f"Résultat de la prédiction : {diagnostic}")
 
         # Compute Confusion Matrix
-        y_pred = model.predict(scaler.transform(X_test))  # Now X_test is properly loaded
+        y_pred = model.predict(scaler.transform(X_test))
         cm = confusion_matrix(y_test, y_pred)
 
-        # Display the Confusion Matrix as a Heatmap
-        fig, ax = plt.subplots(figsize=(4, 3))  # Adjust figure size to be smaller
-        sns.heatmap(cm, annot=True, fmt='g', cmap="Purples", ax=ax)
-        ax.set_xlabel("True Values")
-        ax.set_ylabel("Predictions")
-        ax.set_title("Confusion Matrix")
-        st.pyplot(fig)
- y_pred)
+        # Custom colormap similar to provided UI colors
+        from matplotlib.colors import LinearSegmentedColormap
+        custom_cmap = LinearSegmentedColormap.from_list("custom_cmap", ["#e1f0ff", "#a7c8f2", "#6da0e5", "#2e75c5"])
 
-        # Display the Confusion Matrix as a Heatmap
-        fig, ax = plt.subplots(figsize=(4, 3))  # Adjust figure size to be smaller
-        sns.heatmap(cm, annot=True, fmt='g', cmap="Purples", ax=ax)
-        ax.set_xlabel("True Values")
-        ax.set_ylabel("Predictions")
-        ax.set_title("Confusion Matrix")
-        st.pyplot(fig)
-, y_pred)
+        # Display the Confusion Matrix as a Heatmap with customized colors
+        fig, ax = plt.subplots(figsize=(4, 3))
+        sns.heatmap(cm, annot=True, fmt='g', cmap=custom_cmap, cbar=True,
+                    linewidths=1, linecolor='white', ax=ax)
+        ax.set_xlabel("Valeurs Prédites", fontsize=12, color='#333333')
+        ax.set_ylabel("Valeurs Réelles", fontsize=12, color='#333333')
+        ax.set_title("Matrice de Confusion", fontsize=14, color='#333333')
 
-        # Display the Confusion Matrix as a Heatmap
-        fig, ax = plt.subplots(figsize=(4, 3))  # Adjust figure size to be smaller
-        sns.heatmap(cm, annot=True, fmt='g', cmap="Purples", ax=ax)
-        ax.set_xlabel("True Values")
-        ax.set_ylabel("Predictions")
-        ax.set_title("Confusion Matrix")
+        # Improve tick labels for visibility
+        ax.xaxis.set_tick_params(labelsize=10, colors='#333333')
+        ax.yaxis.set_tick_params(labelsize=12, colors='#333333')
+
+        plt.tight_layout()
         st.pyplot(fig)
