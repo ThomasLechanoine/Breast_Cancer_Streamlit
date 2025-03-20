@@ -1,40 +1,76 @@
-# prep
-
-#////////////////////////////////
-import zipfile
+import tensorflow as tf
 import os
-
-#////////////////////////////////
-
-def download():
-    """
-    Extrait un fichier ZIP contenant les données d'entraînement si nécessaire.
-    """
-    zip_path = "Data/Data_prepros.zip"  # Modifier avec le bon chemin
-    extract_path = "Data/Data_Deep_Learning"
-
-    # Vérifier si les données existent déjà
-    if not os.path.exists(extract_path):
-        print(f"Extraction des données depuis {zip_path}...")
-        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-            zip_ref.extractall(extract_path)
-        print("✅ Extraction terminée !")
-    else:
-        print("✅ Les données existent déjà, extraction non nécessaire.")
-
-#////////////////////////////////////////////////////////////////
-
+from tensorflow.keras.applications.vgg16 import preprocess_input
+from params import *
 import numpy as np
-from tensorflow.keras.preprocessing.image import load_img, img_to_array
 
-def preprocess_image(image_path):
+
+def load_custom_dataset(img_size=(224, 224), batch_size=16):
     """
-    Charge et prétraite une image pour le modèle de deep learning.
+    Charge les images depuis un dossier structuré avec des sous-dossiers par classe.
     """
-    img = load_img(image_path, target_size=(224, 224))  # Taille adaptée au modèle
-    img_array = img_to_array(img) / 255.0  # Normalisation
-    img_array = np.expand_dims(img_array, axis=0)  # Ajouter une dimension batch
-    return img_array
+
+    train_ds = tf.keras.preprocessing.image_dataset_from_directory(
+        os.path.join(DL_DATASET_PATH, "train"),  # ✅ Utilisation de DL_DATASET_PATH
+        image_size=img_size,
+        batch_size=batch_size,
+        label_mode="int"  # Labels entiers (0 et 1)
+    )
+
+    val_ds = tf.keras.preprocessing.image_dataset_from_directory(
+        os.path.join(DL_DATASET_PATH, "valid"),  # ✅ Utilisation de DL_DATASET_PATH
+        image_size=img_size,
+        batch_size=batch_size,
+        label_mode="int"
+    )
+
+    def preprocess(image, label):
+        image = preprocess_input(tf.image.resize(image, img_size))  # Normalisation
+        return image, label
+
+    # Appliquer le prétraitement
+    train_ds = train_ds.map(preprocess).prefetch(tf.data.AUTOTUNE)
+    val_ds = val_ds.map(preprocess).prefetch(tf.data.AUTOTUNE)
+
+    return train_ds, val_ds
+
+# 📌 Tester si le dataset est bien chargé
+train_ds, val_ds = load_custom_dataset()
+
+for image_batch, label_batch in train_ds.take(1):
+    print(f"Batch d'images: {image_batch.shape}")  # Devrait être (batch_size, 224, 224, 3)
+    print(f"Batch de labels: {label_batch.numpy()}")  # Devrait contenir 0 ou 1
 
 
-#////////////////////////////////////////////////////////////////
+# def extract_features(feature_extractor, dataset):
+#     features, labels = [], []
+#     for images, labels_batch in dataset:
+#         # Vérification : Si images est déjà un ndarray, ne pas appeler .numpy()
+#         if isinstance(images, np.ndarray):
+#             batch_features = feature_extractor.predict(images, verbose=0)
+#         else:
+#             batch_features = feature_extractor(images, training=False).numpy()
+
+#         features.append(batch_features)
+#         labels.append(labels_batch.numpy())
+
+#     return np.vstack(features), np.concatenate(labels)
+
+def extract_features(feature_extractor, dataset):
+    features, labels = [], []
+    for images, labels_batch in dataset:
+        # Vérifier si images est déjà un numpy array
+        if isinstance(images, np.ndarray):
+            batch_features = feature_extractor.predict(images, verbose=0)
+        else:
+            batch_features = feature_extractor(images, training=False).numpy()
+
+        features.append(batch_features)
+
+        # Vérification pour labels_batch
+        if hasattr(labels_batch, "numpy"):
+            labels.append(labels_batch.numpy())
+        else:
+            labels.append(labels_batch)
+
+    return np.vstack(features), np.concatenate(labels)
