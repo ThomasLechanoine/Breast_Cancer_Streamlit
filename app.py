@@ -6,9 +6,11 @@ import tensorflow as tf
 import joblib
 import sys
 import os
-import pandaimport nimport matplotlib.pyplot as plt
+import pandas as pd
+import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import confusion_matrix
+from params import *  # Importation des URLs API
 
 # Machine Learning Imports
 from Machine_learning.ml_preprocess import load_data, preprocess_data
