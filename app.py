@@ -285,7 +285,7 @@ if page == "Classification Tumeurs (ML)":
         st.write("""
         🔍 Notre défi était de **pouvoir Développer un modèle capable de classifier les tumeurs bénignes et malignes à partir de caractéristiques extraites d’images médicales.**.
 
-        🎯 Pour cela, nous avons proposé un Diagnostic Assisté par Machine Learning : Tumeur Bénigne ou Maligne.
+        🎯 Pour cela, nous avons proposé un Diagnostic Assisté par Machine Learning.
         """)
 
     # Ajout d'un deuxième sous-titre avant l'input des caractéristiques tumorales
