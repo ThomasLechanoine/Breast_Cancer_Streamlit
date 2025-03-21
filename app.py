@@ -271,10 +271,13 @@ if page == "Classification Tumeurs (ML)":
     with st.expander("Le Machine Learning en quelques mots"):
         st.write("""
 
-        🧠 Maintenant que vous avez compris comment fonctionne le Machine Learning pour savoir reconnaitre une chocolatine a partir de données.
+        🧠 **Maintenant que vous avez** compris comment fonctionne le Machine Learning** pour savoir **reconnaitre une chocolatine a partir de données**.
 
         📸 Application à notre cas :
-        Nous avons donné au modèle des informations de description de tumeur, pour qu'il apprenne à reconnaître si la tumeur est Dangereuses (maligne) ou non dangereuse (benigne).
+
+        Nous avons donné au modèle des informations de description de tumeur, pour qu'il apprenne à reconnaître si la tumeur est :
+        - Dangereuses (maligne).
+        - Non dangereuse (benigne).
         """)
 
     # 🔍 **Comme expliqué dans l'introduction, le Machine Learning (ML)** est une branche de l'intelligence artificielle.
@@ -427,9 +430,10 @@ if page == "Prédiction Mammographie (DL)":
     with st.expander("Le Deep Learning en quelques mots"):
         st.write("""
 
-        🧠 Maintenant que vous avez compris comment fonctionne le Deep Learning pour savoir reconnaitre une chocolatine à partir d'images.
+        🧠 **Maintenant que vous avez **compris comment fonctionne le Deep Learning** pour savoir **reconnaitre une chocolatine à partir d'images**.
 
         📸 Application à notre cas :
+
         **Nous avons montré au modèle des** milliers de mammographies, **afin qu'il apprenne à détecter la présence ou l'absence d'une tumeur**.
         """)
 
@@ -441,7 +445,7 @@ if page == "Prédiction Mammographie (DL)":
         st.write("""
         🔍 Notre défi était de pouvoir Développer un modèle capable d'analyser les images de mammographies et détecter la présence d'une tumeur de manière fiable.
 
-        🎯 Puis, nous avons réalisé une interface permettant aux utilisateurs de télécharger une image de mammographie, que notre modèle analysera pour fournir une prédiction.
+        🎯 Puis, nous avons réalisé une interface permettant de télécharger une image de mammographie, que notre modèle analysera pour fournir une prédiction.
         """)
 
     # ---------------------- OUTIL DE PRÉDICTION ----------------------
