@@ -283,7 +283,7 @@ if page == "Classification Tumeurs (ML)":
 
     with st.expander("Analyser les tumeurs"):
         st.write("""
-        🔍 NNotre défi était de pouvoir Développer un modèle capable de **classifier les tumeurs** malignes et bénignes à partir de caractéristiques extraites d’images médicales de manière **fiable**.
+        🔍 Notre défi était de pouvoir Développer un modèle capable de **classifier les tumeurs** malignes et bénignes de manière **fiable**.
 
         🎯 Puis, nous avons intégré notre modèle dans un outil de Diagnostic Assisté par Machine Learning.
         """)
@@ -439,7 +439,7 @@ if page == "Prédiction Mammographie (DL)":
 
     with st.expander("Analyser les mammographies"):
         st.write("""
-        🔍 Notre défi était de pouvoir Développer un modèle capable d'analyser les images de mammographies et détecter la présence d'une tumeur avec suffisamment de fiabilité.
+        🔍 Notre défi était de pouvoir Développer un modèle capable d'analyser les images de mammographies et détecter la présence d'une tumeur de manière fiable.
 
         🎯 Puis, nous avons réalisé une interface permettant aux utilisateurs de télécharger une image de mammographie, que notre modèle analysera pour fournir une prédiction.
         """)
