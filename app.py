@@ -434,7 +434,9 @@ if page == "Prédiction Mammographie (DL)":
 
         📸 Application à notre cas :
 
-        **Nous avons montré au modèle des** milliers de mammographies, **afin qu'il apprenne à** détecter la présence ou l'absence d'une tumeur.
+        **Nous avons montré au modèle des** milliers de mammographies, **afin qu'il apprenne à** détecter :
+        - la présence d'une tumeur.
+        - l'absence d'une tumeur.
         """)
 
        # 🔍 Comme expliqué dans l'introduction, le Deep Learning est une branche de l'intelligence artificielle.
